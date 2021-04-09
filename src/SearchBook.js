@@ -5,14 +5,14 @@ class SearchBook extends Component {
     state = {
         strValue: '',
         arrSearchResult: [],
-        boolLoader : false 
+        boolLoader: false
     }
     callSearchAPI = async (evt) => {
         let arrData = [];
         let strQuery = evt.target.value;
         this.setState({
             strValue: strQuery,
-            boolLoader : true ,
+            boolLoader: true,
         });
         let { Search } = this.props;
 
@@ -22,15 +22,16 @@ class SearchBook extends Component {
 
             })
         }
-        if (arrData.error !== undefined) {
+        if (arrData.error !== undefined || !Array.isArray(arrData) || strQuery === '') {
             arrData = [];
         }
         this.setState({
             arrSearchResult: arrData,
-            boolLoader : false 
+            boolLoader: false
         })
     }
     render() {
+        const {objBookMapper} = this.props;
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -54,17 +55,20 @@ class SearchBook extends Component {
                             <div className="loader"></div>
 
                         </div>}
-                        { this.state.strValue !== '' && this.state.arrSearchResult.length === 0 && (
-                                <h3>No data found matching that search input , try something else.</h3>
+                    {this.state.strValue !== '' && this.state.arrSearchResult.length === 0 && (
+                        <h3>No data found matching that search input , try something else.</h3>
 
-                        )}
+                    )}
                     <ol className="books-grid">
                         {
-                            this.state.arrSearchResult.map((objBook) => (
+                            this.state.arrSearchResult.map((objBook) => {
+                                
+                                    objBook.shelf = objBookMapper[objBook.id] === undefined ? 'none' : objBookMapper[objBook.id];
+                                return (
                                 <li key={objBook.id}>
-                                    <Book Book={objBook}  />
+                                    <Book Book={objBook} />
                                 </li>
-                            ))
+                            )})
                         }
                     </ol>
                 </div>
