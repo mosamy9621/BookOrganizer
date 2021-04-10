@@ -21,3 +21,12 @@ npm start
 ```sh
 http://localhost:3000 
 ``` 
+## How to use
+this is what home page looks like ,you can click on the small plus mark  to view search page. 
+![Alt text](https://github.com/mosamy9621/BookOrganizer/blob/home-page.png)
+ or you can click on the arrow down icon to change the shelf of the chosen book.
+![Alt text](https://github.com/mosamy9621/BookOrganizer/blob/home-page-shelf.png) 
+this how search page looks like , you can write a keword to look for and see the results
+![Alt text](https://github.com/mosamy9621/BookOrganizer/blob/search-page-result.png) 
+typing not valid keyword to look for
+![Alt text](https://github.com/mosamy9621/BookOrganizer/blob/search-page-no-result.png) 
