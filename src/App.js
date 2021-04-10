@@ -14,23 +14,29 @@ class BooksApp extends React.Component {
       books.forEach(objBook => {
         this.objBookMapper[objBook.id] = objBook.shelf;
       })
-      this.setState({ arrBook: books })
+      this.setState({ arrBook: books });
     })
   };
   submitSearch = (strQuery) => {
-    return BooksAPI.search(strQuery);
+    return
   };
+  afterUpdate = (objBook) => {
+    let arrNewData = this.state.arrBook;
+    arrNewData = this.state.arrBook.filter((book) => book.id !== objBook.id);
+    arrNewData.push(objBook);
+    this.objBookMapper[objBook.id] = objBook.shelf;
+    this.setState({ arrBook: arrNewData });
+  }
   render() {
     return (
       <div className="app">
         <Route path="/search" render={() => (
-          <SearchBook Search={this.submitSearch} objBookMapper={this.objBookMapper} />
+          <SearchBook Search={this.submitSearch} onBookUpdate={this.afterUpdate} objBookMapper={this.objBookMapper} />
         )}>
         </Route>
         <Route exact path="/" render={() => (
-          <ListBook arrAllBooks={this.state.arrBook} />
+          <ListBook arrAllBook={this.state.arrBook} onBookUpdate={this.afterUpdate} />
         )}>
-
         </Route>
       </div>
     )

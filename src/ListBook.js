@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import BookShelf from './BookShelf'
 class ListBook extends Component {
     render() {
-        const arrAllBook = this.props.arrAllBooks;
+        const { arrAllBook, onBookUpdate } = this.props;
         if (!Array.isArray(arrAllBook) || arrAllBook.length === 0) {
             return (
                 <div className="list-books">
@@ -26,9 +26,9 @@ class ListBook extends Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        <BookShelf strTitle="Currently Reading" arrBook={arrCurrentlyReading} />
-                        <BookShelf strTitle="Want To Read" arrBook={arrWantToRead} />
-                        <BookShelf strTitle="Read" arrBook={arrRead} />
+                        <BookShelf strTitle="Currently Reading" arrBook={arrCurrentlyReading} onBookUpdate={onBookUpdate} />
+                        <BookShelf strTitle="Want To Read" arrBook={arrWantToRead} onBookUpdate={onBookUpdate} />
+                        <BookShelf strTitle="Read" arrBook={arrRead} onBookUpdate={onBookUpdate} />
 
                     </div>
                 </div>

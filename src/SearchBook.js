@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { search } from './BooksAPI';
 import Book from './Book';
 class SearchBook extends Component {
     state = {
@@ -7,6 +8,7 @@ class SearchBook extends Component {
         arrSearchResult: [],
         boolLoader: false
     }
+
     callSearchAPI = async (evt) => {
         let arrData = [];
         let strQuery = evt.target.value;
@@ -14,10 +16,9 @@ class SearchBook extends Component {
             strValue: strQuery,
             boolLoader: true,
         });
-        let { Search } = this.props;
 
         if (strQuery !== '') {
-            await Search(strQuery).then(arrBook => {
+            await search(strQuery).then(arrBook => {
                 arrData = arrBook;
 
             })
@@ -31,7 +32,7 @@ class SearchBook extends Component {
         })
     }
     render() {
-        const {objBookMapper} = this.props;
+        const { objBookMapper, onBookUpdate } = this.props;
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -62,13 +63,14 @@ class SearchBook extends Component {
                     <ol className="books-grid">
                         {
                             this.state.arrSearchResult.map((objBook) => {
-                                
-                                    objBook.shelf = objBookMapper[objBook.id] === undefined ? 'none' : objBookMapper[objBook.id];
+
+                                objBook.shelf = objBookMapper[objBook.id] === undefined ? 'none' : objBookMapper[objBook.id];
                                 return (
-                                <li key={objBook.id}>
-                                    <Book Book={objBook} />
-                                </li>
-                            )})
+                                    <li key={objBook.id}>
+                                        <Book Book={objBook} onBookUpdate={onBookUpdate} />
+                                    </li>
+                                )
+                            })
                         }
                     </ol>
                 </div>

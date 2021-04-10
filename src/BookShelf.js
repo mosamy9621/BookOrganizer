@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Book from './Book';
 class BookShelf extends Component {
     render() {
-        const { strTitle, arrBook } = this.props;
+        const { strTitle, arrBook, onBookUpdate } = this.props;
         return (
             <div className="bookshelf">
                 <h2 className="bookshelf-title">{strTitle}</h2>
@@ -12,7 +12,7 @@ class BookShelf extends Component {
                         {
                             arrBook.map((objBook) => (
                                 <li key={objBook.id}>
-                                    <Book Book={objBook} />
+                                    <Book Book={objBook} onBookUpdate={onBookUpdate} />
                                 </li>
                             ))
                         }
