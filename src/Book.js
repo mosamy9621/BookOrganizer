@@ -1,5 +1,6 @@
 import React from 'react';
 import BookShelfChanger from './BookShelfChanger';
+import PropTypes from 'prop-types';
 /**
  * @description : This is stateless component function that responsible for rendering the component.
  * @param {object} props 
@@ -19,5 +20,9 @@ function Book(props) {
             {Array.isArray(objBook.authors) && <div className="book-authors">{objBook.authors.join(' and ')}</div>}
         </div>
     );
+}
+Book.propType = {
+    objBook: PropTypes.object.isRequired,
+    onBookUpdate: PropTypes.func.isRequired,
 }
 export default Book;

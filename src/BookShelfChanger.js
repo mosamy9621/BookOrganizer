@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { update } from './BooksAPI';
+import PropTypes from 'prop-types';
 class BookShelfChanger extends Component {
     state = {
         strValue: ''
@@ -16,8 +17,8 @@ class BookShelfChanger extends Component {
             this.setState({
                 strValue: _value
             });
-            this.props.onBookUpdate(objBook);    
-        }).catch(objResponse=>{
+            this.props.onBookUpdate(objBook);
+        }).catch(objResponse => {
             alert(objResponse);
         });
     }
@@ -47,5 +48,8 @@ class BookShelfChanger extends Component {
             </div>
         )
     }
+}
+BookShelfChanger.propTypes = {
+    objBook: PropTypes.object.isRequired
 }
 export default BookShelfChanger;

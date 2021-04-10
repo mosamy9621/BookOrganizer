@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import BookShelf from './BookShelf'
+import PropTypes from 'prop-types';
 /**
  * @description : This is stateless component function that responsible for rendering the component.
  * @param {object} props 
@@ -41,5 +42,9 @@ function ListBook(props) {
             </div>
         </div>
     );
+}
+ListBook.propTypes = {
+    arrAllBook: PropTypes.array.isRequired,
+    onBookUpdate: PropTypes.func.isRequired,
 }
 export default ListBook;

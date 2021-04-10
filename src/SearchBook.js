@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { search } from './BooksAPI';
+import PropTypes from 'prop-types';
 import Book from './Book';
 class SearchBook extends Component {
     state = {
@@ -20,10 +21,12 @@ class SearchBook extends Component {
             strValue: strQuery,
             boolLoader: true,
         });
-        await search(strQuery).then(arrBook => {
-            arrData = arrBook;
-        });
-        if (strQuery === '' || arrData.error !== undefined || !Array.isArray(arrData)) {
+        if (strQuery !== '') {
+            await search(strQuery).then(arrBook => {
+                arrData = arrBook;
+            });
+        }
+        if (this.state.strValue === '' || arrData.error !== undefined || !Array.isArray(arrData)) {
             arrData = [];
         }
         this.setState({
@@ -74,4 +77,8 @@ class SearchBook extends Component {
         );
     }
 }
+SearchBook.propTypes = {
+    objBookMapper: PropTypes.object.isRequired,
+    onBookUpdate: PropTypes.func.isRequired
+};
 export default SearchBook;

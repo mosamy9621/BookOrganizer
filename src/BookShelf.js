@@ -1,5 +1,6 @@
 import React from 'react';
 import Book from './Book';
+import PropTypes from 'prop-types';
 /**
  * @description : This is stateless component function that responsible for rendering the component.
  * @param {object} props 
@@ -24,5 +25,11 @@ function BookShelf(props) {
             </div>
         </div>
     );
+}
+//  strTitle, arrBook, onBookUpdate 
+BookShelf.propTypes = {
+    strTitle: PropTypes.string.isRequired,
+    arrBook: PropTypes.array.isRequired,
+    onBookUpdate: PropTypes.func.isRequired,
 }
 export default BookShelf;
