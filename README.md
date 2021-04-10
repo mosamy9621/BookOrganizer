@@ -22,11 +22,21 @@ npm start
 http://localhost:3000 
 ``` 
 ## How to use
-this is what home page looks like ,you can click on the small plus mark  to view search page. 
-![Alt text](https://github.com/mosamy9621/BookOrganizer/blob/home-page.png)
- or you can click on the arrow down icon to change the shelf of the chosen book.
-![Alt text](https://github.com/mosamy9621/BookOrganizer/blob/home-page-shelf.png) 
-this how search page looks like , you can write a keword to look for and see the results
-![Alt text](https://github.com/mosamy9621/BookOrganizer/blob/search-page-result.png) 
-typing not valid keyword to look for
-![Alt text](https://github.com/mosamy9621/BookOrganizer/blob/search-page-no-result.png) 
+
+### this is what home page looks like ,you can click on the small plus mark  to view search page. 
+
+![alt Home page ](https://raw.githubusercontent.com/mosamy9621/BookOrganizer/master/blob/home-page.png)
+
+
+### or you can click on the arrow down icon to change the shelf of the chosen book.
+
+![alt Home page with shelf menue](https://raw.githubusercontent.com/mosamy9621/BookOrganizer/master/blob/home-page-shelf.png) 
+
+### this how search page looks like , you can write a keword to look for and see the results
+
+![alt search page with valid results](https://raw.githubusercontent.com/mosamy9621/BookOrganizer/master/blob/search-page-result.png) 
+
+### typing not valid keyword to look for
+
+![alt search no results](https://raw.githubusercontent.com/mosamy9621/BookOrganizer/master/blob/search-page-no-result.png) 
+
