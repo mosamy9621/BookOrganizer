@@ -4,23 +4,36 @@ class BookShelfChanger extends Component {
     state = {
         strValue: ''
     };
+    /**
+     * @description : This function is responsible for handling the selection of book shelf.
+     * @param {object} evt : event to the select element.
+     */
     handleChange = (evt) => {
-        let _value = evt.target.value
+        let _value = evt.target.value;
         let { objBook } = this.props;
         objBook.shelf = _value;
-        this.props.onBookUpdate(objBook);
         update(objBook, _value).then(objResponse => {
             this.setState({
                 strValue: _value
-            })
+            });
+            this.props.onBookUpdate(objBook);    
+        }).catch(objResponse=>{
+            alert(objResponse);
         });
     }
+    /**
+     * @description : runs when component render , it change the selection to the actual shelf of the book
+     */
     componentDidMount() {
         const { objBook } = this.props;
         this.setState({
             strValue: objBook.shelf
         })
     }
+    /**
+     * @description : this function is responsible for rendering the component.
+     * @returns JSX to the component to be rendered.
+     */
     render() {
         return (
             <div className="book-shelf-changer">

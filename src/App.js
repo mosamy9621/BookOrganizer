@@ -9,6 +9,9 @@ class BooksApp extends React.Component {
     arrBook: [],
   };
   objBookMapper = {};
+  /**
+   * @description : this function is called when component is about to render , it gets all the books attached to current user
+   */
   componentDidMount() {
     BooksAPI.getAll().then(books => {
       books.forEach(objBook => {
@@ -17,9 +20,10 @@ class BooksApp extends React.Component {
       this.setState({ arrBook: books });
     })
   };
-  submitSearch = (strQuery) => {
-    return
-  };
+  /**
+   * @description : this function is handleing the effect that happens after updating the book from shelf to shelf
+   * @param {Object} objBook 
+   */
   afterUpdate = (objBook) => {
     let arrNewData = this.state.arrBook;
     arrNewData = this.state.arrBook.filter((book) => book.id !== objBook.id);
@@ -27,11 +31,15 @@ class BooksApp extends React.Component {
     this.objBookMapper[objBook.id] = objBook.shelf;
     this.setState({ arrBook: arrNewData });
   }
+  /**
+   * @description : This function is responsible for rendering the component. 
+   * @returns : JSX to the component to be rendered.
+   */
   render() {
     return (
       <div className="app">
         <Route path="/search" render={() => (
-          <SearchBook Search={this.submitSearch} onBookUpdate={this.afterUpdate} objBookMapper={this.objBookMapper} />
+          <SearchBook onBookUpdate={this.afterUpdate} objBookMapper={this.objBookMapper} />
         )}>
         </Route>
         <Route exact path="/" render={() => (
@@ -39,7 +47,7 @@ class BooksApp extends React.Component {
         )}>
         </Route>
       </div>
-    )
+    );
   }
 }
 

@@ -8,29 +8,33 @@ class SearchBook extends Component {
         arrSearchResult: [],
         boolLoader: false
     }
-
-    callSearchAPI = async (evt) => {
+    /**
+     * @description this is asynchronous function that is responsible for Searching for key that the user enters 
+     * @param {object} evt : event of the input
+     * 
+     */
+    Search = async (evt) => {
         let arrData = [];
         let strQuery = evt.target.value;
         this.setState({
             strValue: strQuery,
             boolLoader: true,
         });
-
-        if (strQuery !== '') {
-            await search(strQuery).then(arrBook => {
-                arrData = arrBook;
-
-            })
-        }
-        if (arrData.error !== undefined || !Array.isArray(arrData) || strQuery === '') {
+        await search(strQuery).then(arrBook => {
+            arrData = arrBook;
+        });
+        if (strQuery === '' || arrData.error !== undefined || !Array.isArray(arrData)) {
             arrData = [];
         }
         this.setState({
             arrSearchResult: arrData,
             boolLoader: false
-        })
+        });
     }
+    /**
+     * @description : This function is responsible for rendering the component. 
+     * @returns : JSX to the component to be rendered.
+     */
     render() {
         const { objBookMapper, onBookUpdate } = this.props;
         return (
@@ -38,32 +42,24 @@ class SearchBook extends Component {
                 <div className="search-books-bar">
                     <Link className="close-search" to="/" >Close</Link>
                     <div className="search-books-input-wrapper">
-                        {/*
-              NOTES: The search from BooksAPI is limited to a particular set of search terms.
-              You can find these search terms here:
-              https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-              However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-              you don't find a specific author or title. Every search is limited by search terms.
-            */}
-                        <input type="text" placeholder="Search by title or author" value={this.state.strValue} onChange={this.callSearchAPI} />
-
+                        <input type="text" placeholder="Search by title or author" value={this.state.strValue} onChange={this.Search} />
                     </div>
                 </div>
                 <div className="search-books-results">
                     {this.state.boolLoader &&
-                        <div className="loader-parent">
+                        (<div className="loader-parent">
                             <div className="loader"></div>
-
-                        </div>}
-                    {this.state.strValue !== '' && this.state.arrSearchResult.length === 0 && (
-                        <h3>No data found matching that search input , try something else.</h3>
-
-                    )}
+                        </div>
+                        )
+                    }
+                    {this.state.strValue !== '' && this.state.arrSearchResult.length === 0 &&
+                        (
+                            <h3>No data found matching that search input , try something else.</h3>
+                        )
+                    }
                     <ol className="books-grid">
                         {
                             this.state.arrSearchResult.map((objBook) => {
-
                                 objBook.shelf = objBookMapper[objBook.id] === undefined ? 'none' : objBookMapper[objBook.id];
                                 return (
                                     <li key={objBook.id}>
@@ -75,7 +71,7 @@ class SearchBook extends Component {
                     </ol>
                 </div>
             </div>
-        )
+        );
     }
 }
 export default SearchBook;
