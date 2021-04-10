@@ -26,7 +26,6 @@ function BookShelf(props) {
         </div>
     );
 }
-//  strTitle, arrBook, onBookUpdate 
 BookShelf.propTypes = {
     strTitle: PropTypes.string.isRequired,
     arrBook: PropTypes.array.isRequired,
